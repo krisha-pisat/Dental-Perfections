@@ -8,9 +8,14 @@ const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 50);
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 50);
+    };
+
     window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
   }, []);
 
   const menuVariants = {
@@ -19,51 +24,47 @@ const Navbar = () => {
   };
 
   return (
-    <div
-      className={`fixed top-0 left-0 w-full z-50 flex justify-center transition-all duration-300 ${
-        scrolled ? 'pt-2' : 'pt-0'
-      }`}
-    >
+    <div className={`
+      fixed top-0 left-0 w-full z-50 flex justify-center transition-all duration-300
+      ${scrolled ? 'pt-4' : 'pt-0'}
+    `}>
       <motion.nav
         initial={{ y: -120 }}
         animate={{ y: 0 }}
         transition={{ duration: 0.5, ease: 'easeOut' }}
-        className={`flex items-center justify-between w-full max-w-7xl transition-all duration-300 ease-in-out bg-white ${
-          scrolled
-            ? 'shadow-md rounded-full py-2 px-8'
-            : 'py-4 px-10 shadow-none'
-        }`}
+        className={`
+          flex justify-between items-center transition-all duration-300 ease-in-out relative
+          ${scrolled
+            ? 'max-w-6xl bg-white shadow-lg rounded-full py-2 px-6'
+            : 'w-full bg-white py-4 px-8'
+          }
+        `}
       >
         {/* Logo Section */}
         <Link to="/" className="flex items-center space-x-3">
-          <img
-            src="/logo.jpg"
-            alt="Dental Perfections Logo"
-            className={`rounded-full object-cover transition-all duration-300 ${
-              scrolled ? 'h-10 w-10' : 'h-16 w-16'
-            }`}
+          <img 
+            src="/logo.jpg" 
+            alt="Dental Perfections Logo" 
+            className={`
+              rounded-full object-cover transition-all duration-300
+              ${scrolled ? 'h-12 w-12' : 'h-16 w-16'}
+            `}
           />
-          <div
-            className={`transition-all duration-300 overflow-hidden ${
-              scrolled ? 'w-0 opacity-0' : 'w-auto opacity-100'
-            }`}
-          >
-            <h1 className="text-blue-900 font-semibold text-lg whitespace-nowrap">
-              Dental Perfections
-            </h1>
+          <div className={`
+            transition-all duration-300 overflow-hidden
+            ${scrolled ? 'w-0 opacity-0' : 'w-auto opacity-100'}
+          `}>
+            <h1 className="text-blue-900 font-semibold text-lg whitespace-nowrap">Dental Perfections</h1>
             <p className="text-sm text-gray-500 -mt-1 whitespace-nowrap">
               Excellence in Dental Care
             </p>
           </div>
         </Link>
 
-        {/* Navigation Links */}
-        <div className="hidden md:flex items-center justify-center flex-1">
-          <div
-            className={`flex items-center justify-center transition-all duration-300 ${
-              scrolled ? 'space-x-5 text-sm' : 'space-x-8 text-base'
-            } text-gray-700 font-medium`}
-          >
+        {/* Desktop Navigation Links - Now absolutely centered */}
+        <div className="hidden md:flex absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
+          {/* Added 'flex' here to ensure links stay in a single line */}
+          <div className="flex space-x-8 text-gray-700 font-medium">
             <Link to="/" className="hover:text-blue-900 transition-colors">Home</Link>
             <Link to="/about" className="hover:text-blue-900 transition-colors">About Us</Link>
             <Link to="/services" className="hover:text-blue-900 transition-colors">Services</Link>
@@ -74,30 +75,21 @@ const Navbar = () => {
           </div>
         </div>
 
-        {/* Appointment Button / Mobile Menu */}
-        <div className="flex items-center">
-          <div className="hidden md:block">
-            <button
-              className={`transition-all duration-300 font-semibold rounded-lg shadow-md whitespace-nowrap ${
-                scrolled
-                  ? 'bg-blue-900 text-white px-4 py-1 text-sm hover:bg-blue-800'
-                  : 'bg-blue-900 text-white px-6 py-2 text-base hover:bg-blue-800'
-              }`}
-            >
-              Book Appointment
-            </button>
-          </div>
-          <div className="md:hidden ml-2">
-            <button
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="text-2xl"
-            >
-              {isMenuOpen ? <FiX /> : <FiMenu />}
-            </button>
-          </div>
+        {/* Appointment Button */}
+        <div className="hidden md:block">
+          <button className="bg-blue-900 text-white font-semibold px-5 py-2 rounded-lg shadow-md hover:bg-blue-800 transition-colors whitespace-nowrap">
+            Book Appointment
+          </button>
         </div>
 
-        {/* Mobile Menu */}
+        {/* Hamburger Menu Button (Visible on Mobile) */}
+        <div className="md:hidden">
+          <button onClick={() => setIsMenuOpen(!isMenuOpen)} className="text-2xl">
+            {isMenuOpen ? <FiX /> : <FiMenu />}
+          </button>
+        </div>
+
+        {/* Mobile Menu Dropdown */}
         <AnimatePresence>
           {isMenuOpen && (
             <motion.div
@@ -105,7 +97,7 @@ const Navbar = () => {
               initial="hidden"
               animate="visible"
               exit="hidden"
-              className="md:hidden absolute top-full left-0 mt-2 w-full bg-white shadow-lg rounded-b-lg"
+              className="md:hidden absolute top-full left-0 mt-2 w-full bg-white shadow-lg rounded-b-lg col-span-3"
             >
               <div className="flex flex-col items-center gap-y-6 py-8">
                 <Link to="/" onClick={() => setIsMenuOpen(false)}>Home</Link>
@@ -125,6 +117,6 @@ const Navbar = () => {
       </motion.nav>
     </div>
   );
-};
+}
 
 export default Navbar;

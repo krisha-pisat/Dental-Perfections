@@ -1,16 +1,20 @@
 import React from 'react'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
+import MeetTheDoctor from '../components/MeetTheDoctor'
+import InfoParallax from '../components/InfoParallax'
+import TreatmentsSection from '../components/TreatmentsSection'
 
 const AboutUs = () => {
   return (
     <div> 
         <Navbar />
-        <div className="py-24 text-center">
-        <h1 className="text-4xl font-bold">About Us</h1>
-        <p className="mt-4 text-lg">This is the about page for Dental Perfections.</p>
-        </div>
-        <Footer />
+        <br></br>
+        <MeetTheDoctor />
+        <TreatmentsSection />
+        <InfoParallax/>
+        
+        
       
     </div>
   )
