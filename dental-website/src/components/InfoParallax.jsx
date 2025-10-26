@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef } from 'react'; // Added React import
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { FaShieldAlt, FaUsers, FaClock, FaMedkit } from 'react-icons/fa';
 
@@ -9,55 +9,78 @@ const features = [
   { icon: <FaMedkit />, title: "Minimally Invasive Solutions", description: "We use modern additive dentistry techniques to help preserve your natural tooth structure." },
 ];
 
-const InfoParallax = () => {
+const InfoParallax = () => { // Changed export const InfoParallax = () => to const InfoParallax = () => { ... } export default InfoParallax;
   const targetRef = useRef(null);
   const { scrollYProgress } = useScroll({
     target: targetRef,
     offset: ["start end", "end start"],
   });
 
-  // Moves the background image up slowly as you scroll down
   const yBackground = useTransform(scrollYProgress, [0, 1], ["-15%", "15%"]);
-  // Moves the foreground content box up faster as you scroll down
   const yForeground = useTransform(scrollYProgress, [0, 1], ["25%", "-25%"]);
+  const opacity = useTransform(scrollYProgress, [0, 0.3, 0.7, 1], [0.3, 1, 1, 0.3]);
 
   return (
-    <section ref={targetRef} className="relative h-[150vh] bg-gray-100">
+    <section ref={targetRef} className="relative h-[150vh] bg-gray-100"> {/* bg-muted to bg-gray-100 */}
       <div className="sticky top-0 h-screen overflow-hidden">
-        
+
         {/* Background Image Parallax */}
-        <motion.div 
+        <motion.div
           className="absolute inset-0 z-0"
-          style={{ 
-            backgroundImage: 'url(/clinic.jpeg)',
+          style={{
+            backgroundImage: `url(/clinic.jpeg)`, // Assuming clinic.jpeg is in public folder
             backgroundSize: 'cover',
             backgroundPosition: 'center',
-            y: yBackground 
+            y: yBackground
           }}
-        />
-        
-        {/* Foreground Content Parallax */}
-        <motion.div 
-          className="relative z-10 flex items-center justify-center h-full"
-          style={{ y: yForeground }}
         >
-          <div className="bg-[#1e7b7e] bg-opacity-90 text-white p-12 rounded-lg shadow-xl max-w-4xl mx-auto">
-            <h2 className="text-3xl font-bold text-center mb-10">Why Choose Us</h2>
+          <div className="absolute inset-0 bg-black/40" /> {/* bg-foreground/40 to bg-black/40 */}
+        </motion.div>
+
+        {/* Foreground Content Parallax */}
+        <motion.div
+          className="relative z-10 flex items-center justify-center h-full px-6"
+          style={{ y: yForeground, opacity }}
+        >
+          {/* bg-primary/95 to bg-[#1e3a8a]/95, text-primary-foreground to text-white, border-primary-light/20 to border-blue-300/20 */}
+          <div className="bg-[#1e3a8a]/95 backdrop-blur-sm text-white p-8 md:p-12 rounded-2xl shadow-2xl max-w-4xl mx-auto border border-blue-300/20">
+            <motion.h2
+              className="text-3xl md:text-4xl font-playfair font-bold text-center mb-10" // font-display to font-playfair
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+            >
+              Why Choose Us
+            </motion.h2>
+
             <div className="space-y-8">
               {features.map((feature, index) => (
-                <div key={index} className="flex items-start gap-4">
-                  <div className="text-2xl text-yellow-400 mt-1">{feature.icon}</div>
-                  <div>
-                    <h3 className="font-semibold text-lg">{feature.title}</h3>
-                    <p className="text-gray-200 text-sm">{feature.description}</p>
+                <motion.div
+                  key={index}
+                  className="flex items-start gap-4 group"
+                  initial={{ opacity: 0, x: -30 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                >
+                  {/* text-accent to text-[#34d399] */}
+                  <div className="text-3xl text-[#34d399] mt-1 group-hover:scale-110 transition-transform duration-300">
+                    {feature.icon}
                   </div>
-                </div>
+                  <div>
+                    <h3 className="font-playfair font-semibold text-lg mb-2">{feature.title}</h3> {/* font-display to font-playfair */}
+                    <p className="text-gray-200 text-sm leading-relaxed">{feature.description}</p> {/* text-primary-foreground/90 to text-gray-200 */}
+                  </div>
+                </motion.div>
               ))}
             </div>
+
             <div className="text-center mt-12">
-              <motion.button 
-                className="bg-[#d9a44a] text-white font-bold py-3 px-8 rounded-lg"
+              {/* Replaced custom Button with standard button + motion */}
+              <motion.button
                 whileHover={{ scale: 1.05 }}
+                className="bg-[#d9a44a] hover:bg-[#c6913b] text-white font-bold py-3 px-8 rounded-lg shadow-lg transition-all duration-300" // bg-gold to bg-[#d9a44a], hover:bg-gold-dark to hover:bg-[#c6913b], text-gold-foreground to text-white
               >
                 Book Online Today
               </motion.button>
@@ -70,4 +93,4 @@ const InfoParallax = () => {
   );
 };
 
-export default InfoParallax;
+export default InfoParallax; // Added default export

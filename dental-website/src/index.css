@@ -1,4 +1,3 @@
-
 .font-playfair {
   font-family: 'Playfair Display', serif;
 }
@@ -39,6 +38,22 @@
     opacity: 0;
   }
 }
+
+/* 1. ADD THESE STYLES FOR LENIS */
+html.lenis {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+
 html {
-  scroll-behavior: smooth;
+  /* 2. COMMENT OUT OR DELETE THIS LINE */
+  /* scroll-behavior: smooth; */
 }
