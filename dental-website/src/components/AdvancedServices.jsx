@@ -1,6 +1,17 @@
 import React, { useMemo } from "react";
 import { motion } from "framer-motion";
 
+// 1. IMPORT all your images from the src/images folder
+import OrthodonticsImage from "../images/Orthodontics.jpg";
+import EndodonticsImage from "../images/endodontics.webp";
+import VeneersImage from "../images/veneers.webp";
+import BleachingImage from "../images/bleeching.jpeg";
+import CosmeticImage from "../images/cosmetic.webp";
+import ImplantsImage from "../images/implants.webp";
+import FullMouthImage from "../images/fullmouth.webp";
+import MinorSurgeriesImage from "../images/minor.webp";
+
+
 // Keep your GROUPS data structure exactly as it is
 const GROUPS = [
   {
@@ -8,7 +19,7 @@ const GROUPS = [
     items: [
       {
         title: "Orthodontics",
-        image: "/images/orthodontics.jpg",
+        image: OrthodonticsImage, // 2. USE the imported variable
         points: [
           "Correct teeth alignment and bite.",
           "Improves facial symmetry and smile aesthetics.",
@@ -17,7 +28,7 @@ const GROUPS = [
       },
       {
         title: "Endodontics",
-        image: "/images/endodontics.jpg",
+        image: EndodonticsImage, // 2. USE the imported variable
         points: [
           "Root canal therapy to save infected teeth.",
           "Relieves severe dental pain & infection.",
@@ -31,7 +42,7 @@ const GROUPS = [
     items: [
       {
         title: "Veneers & Crowns",
-        image: "/images/veneers.jpg",
+        image: VeneersImage, // 2. USE the imported variable
         points: [
           "Corrects shape, size and color of teeth.",
           "Strengthens damaged teeth with natural finish.",
@@ -40,7 +51,7 @@ const GROUPS = [
       },
       {
         title: "Laser Tooth Bleaching",
-        image: "/images/bleaching.jpg",
+        image: BleachingImage, // 2. USE the imported variable
         points: [
           "Advanced, fast and safe whitening.",
           "Brightens teeth with minimal sensitivity.",
@@ -49,7 +60,7 @@ const GROUPS = [
       },
       {
         title: "Cosmetic Dentistry",
-        image: "/images/cosmetic.jpg",
+        image: CosmeticImage, // 2. USE the imported variable
         points: [
           "Smile makeovers tailored to individual goals.",
           "Fixes chips, gaps, stains and uneven teeth.",
@@ -63,7 +74,7 @@ const GROUPS = [
     items: [
       {
         title: "Implants",
-        image: "/images/implants.jpg",
+        image: ImplantsImage, // 2. USE the imported variable
         points: [
           "Permanent, natural-looking tooth replacement.",
           "Restores chewing function and bone health.",
@@ -72,7 +83,7 @@ const GROUPS = [
       },
       {
         title: "Full Mouth Restoration",
-        image: "/images/fullmouth.jpg",
+        image: FullMouthImage, // 2. USE the imported variable
         points: [
           "Comprehensive rehabilitation of teeth & bite.",
           "Custom staged plan for function & aesthetics.",
@@ -81,7 +92,7 @@ const GROUPS = [
       },
       {
         title: "Minor Surgeries",
-        image: "/images/minor.jpg",
+        image: MinorSurgeriesImage, // 2. USE the imported variable
         points: [
           "Safe extraction and minor oral surgical care.",
           "Swift recovery with attentive post-op care.",

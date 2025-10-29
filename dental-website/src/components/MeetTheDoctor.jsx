@@ -37,7 +37,7 @@ const MeetTheDoctor = () => {
               {/* Main circular frame */}
               <div className="relative w-full h-full bg-gray-100 rounded-full shadow-2xl border-8 border-white overflow-hidden"> {/* Changed border-background to border-white, bg-secondary to bg-gray-100 */}
                 <img
-                  src="/doctor-image.png" // Kept direct path assuming image is in public
+                  src="/doctor-image.jpg" // Kept direct path assuming image is in public
                   alt="Dr. Minal Pisat"
                   className="w-full h-full object-cover -mt-10" // Adjusted margin slightly
                 />
